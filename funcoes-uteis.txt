@@ -1,0 +1,65 @@
+/* --- Dentro do functions.php --- */
+
+Estiliza a página de admin do ACF
+
+<?php
+add_action('acf/input/admin_head', 'my_acf_admin_head');
+function my_acf_admin_head() {
+    ?>
+    <style type="text/css">
+        /* CSS here. */
+    </style>
+    <script type="text/javascript">
+    (function( $ ){
+        // Javascript here.
+    })(jQuery);
+    </script>
+    <?php
+}
+
+--------------------------------------------------------------------
+
+Adiciona um custom post type para carrossel com o bootstrap
+
+
+add_action("init", "custom_bootstrap_slider");
+
+function custom_bootstrap_slider()
+{
+	$labels = array(
+		'name'               => _x( 'Slider', 'post type general name'),
+		'singular_name'      => _x( 'Slide', 'post type singular name'),
+		'menu_name'          => _x( 'Slide principal', 'admin menu'),
+		'name_admin_bar'     => _x( 'Slide', 'add new on admin bar'),
+		'add_new'            => _x( 'Add Novo', 'Slide'),
+		'add_new_item'       => __( 'Name'),
+		'new_item'           => __( 'Novo Slide'),
+		'edit_item'          => __( 'Editar Slide'),
+		'view_item'          => __( 'Ver Slide'),
+		'all_items'          => __( 'Todos'),
+		'featured_image'     => __( 'Featured Image', 'text_domain' ),
+		'search_items'       => __( 'Search Slide'),
+		'parent_item_colon'  => __( 'Parent Slide:'),
+		'not_found'          => __( 'No Slide found.'),
+		'not_found_in_trash' => __( 'No Slide found in Trash.'),
+	);
+
+	$args = array(
+		'labels'             => $labels,
+		'menu_icon'	     => 'dashicons-star-half',
+    	        'description'        => __( 'Description.'),
+		'public'             => true,
+		'publicly_queryable' => true,
+		'show_ui'            => true,
+		'show_in_menu'       => true,
+		'query_var'          => true,
+		'rewrite'            => true,
+		'capability_type'    => 'post',
+		'has_archive'        => true,
+		'hierarchical'       => true,
+		'menu_position'      => null,
+		'supports'           => array('title','editor','thumbnail')
+	);
+
+	register_post_type( 'slider', $args );
+}
